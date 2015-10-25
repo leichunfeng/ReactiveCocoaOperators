@@ -235,9 +235,9 @@
     RACSequence *result = [RACSequence
         zip:@[ letters, numbers ]
         reduce:^(NSString *letter, NSString *number) {
-        	return [NSString stringWithFormat:@"%@-%@", letter, number];
+        	return [letter stringByAppendingString:number];
         }];
-    RACSequence *expect = [@"A-1 B-2 C-3 D-4 E-5 F-6 G-7 H-8 I-9" componentsSeparatedByString:@" "].rac_sequence;
+    RACSequence *expect = [@"A1 B2 C3 D4 E5 F6 G7 H8 I9" componentsSeparatedByString:@" "].rac_sequence;
 
     XCTAssertTrue([result isEqual:expect]);
 }
@@ -470,10 +470,10 @@
     ].rac_sequence;
 
     RACSequence *result = [tuples reduceEach:^(NSString *letter, NSString *number) {
-        return [NSString stringWithFormat:@"%@-%@", letter, number];
+        return [letter stringByAppendingString:number];
     }];
 
-    RACSequence *expect = [@"A-1 B-2 C-3 D-4 E-5 F-6 G-7 H-8 I-9" componentsSeparatedByString:@" "].rac_sequence;
+    RACSequence *expect = [@"A1 B2 C3 D4 E5 F6 G7 H8 I9" componentsSeparatedByString:@" "].rac_sequence;
 
     XCTAssertTrue([result isEqual:expect]);
 }
