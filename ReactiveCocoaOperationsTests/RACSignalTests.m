@@ -8,20 +8,21 @@
 
 #import <XCTest/XCTest.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "NSObject+DLIntrospection.h"
 
 /// RACSignal 类簇（class cluster）
 ///
 /// RACSignal 共有 9 个私有的、具体的子类，它们是：
 ///
-/// RACEmptySignal     遍历数组 √
-/// RACReturnSignal    动态序列 √
-/// RACDynamicSignal   非懒计算的序列 √
-/// RACErrorSignal     空序列 √
-/// RACChannelTerminal 遍历索引集 √
-/// RACSubject         遍历信号 √
-/// RACGroupedSignal   遍历字符串 √
-/// RACBehaviorSubject 遍历元组 √
-/// RACReplaySubject   一元序列 √
+/// RACEmptySignal     空信号
+/// RACReturnSignal    一元信号
+/// RACDynamicSignal   动态信号
+/// RACErrorSignal     错误信号
+/// RACChannelTerminal 通道终端
+/// RACSubject         可变信号
+/// RACGroupedSignal   分组信号
+/// RACBehaviorSubject 重演最后值的信号
+/// RACReplaySubject   重演信号
 ///
 /// 继承关系如下：
 ///
@@ -44,6 +45,270 @@
 
 @implementation RACSignalTests
 
+#pragma mark - Find out all methods
+
+- (void)testFindOutAllMethods {
+    RACSequence *classes = @[
+        @"RACStream",
+        @"RACSignal",
+        @"RACChannelTerminal",
+        @"RACSubject",
+        @"RACReplaySubject",
+        @"RACGroupedSignal",
+        @"RACBehaviorSubject",
+        @"RACEmptySignal",
+        @"RACReturnSignal",
+        @"RACDynamicSignal",
+        @"RACErrorSignal",
+    ].rac_sequence;
+
+    BOOL (^filter)(NSString *) = ^(NSString *component) {
+        return @(component.length > 0 && ![component isEqualToString:@"+"] && ![component isEqualToString:@"-"]).boolValue;
+    };
+
+    NSString * (^map)(NSString *) = ^(NSString *component) {
+        NSString *firstLetter = component.rac_sequence.array.firstObject;
+        if ([firstLetter isEqualToString:@"("]) {
+            return [[[component.rac_sequence
+                skipUntilBlock:^(NSString *character) {
+                	return [character isEqualToString:@")"];
+                }]
+                takeUntilBlock:^(NSString *character) {
+                	return [character isEqualToString:@":"];
+                }].array componentsJoinedByString:@""];
+        } else {
+            return [[component.rac_sequence takeUntilBlock:^(NSString *character) {
+                return [character isEqualToString:@":"];
+            }].array componentsJoinedByString:@""];
+        }
+    };
+
+    NSArray * (^reduce)(NSArray *, NSString *, BOOL) = ^(NSArray *accumulator, NSString *class, BOOL classMethods) {
+        NSArray *methods = classMethods ? [NSClassFromString(class) classMethods] : [NSClassFromString(class) instanceMethods];
+
+        accumulator = [accumulator.rac_sequence concat:methods.rac_sequence ?: [RACSequence empty]].array;
+        accumulator = [NSSet setWithArray:accumulator].allObjects;
+
+        return [accumulator sortedArrayUsingComparator:^(NSString *method1, NSString *method2) {
+            RACSequence *components1 = [[[method1 componentsSeparatedByString:@" "].rac_sequence
+            	filter:filter]
+                map:map];
+
+            RACSequence *components2 = [[[method2 componentsSeparatedByString:@" "].rac_sequence
+                filter:filter]
+                map:map];
+
+            RACSequence *zippedComponents = [components1 zipWith:components2];
+
+            return [[[zippedComponents
+                map:^(RACTuple *tuple) {
+                    RACTupleUnpack(NSString *component1, NSString *component2) = tuple;
+                    return @([component1 compare:component2]);
+                }]
+                foldLeftWithStart:@(NSOrderedSame)
+                reduce:^(NSNumber *accumulator, NSNumber *next) {
+                	return accumulator.integerValue == NSOrderedSame ? next : accumulator;
+                }] integerValue];
+        }];
+    };
+
+    NSArray *classMethods = [classes
+        foldLeftWithStart:@[]
+        reduce:^(NSArray *accumulator, NSString *class) {
+        	return reduce(accumulator, class, YES);
+        }];
+
+    NSLog(@"classMethods: %@", classMethods);
+
+    // 输出如下
+    //
+    // 1. 打勾的表示是公开的方法，下面有提供相应的测试用例
+    // 2. 打叉的表示是私有的方法或者其他不相关的方法
+    //
+    // "+ (id)behaviorSubjectWithDefaultValue:(id)arg0 ",
+    // "+ (id)combineLatest:(id)arg0 reduce:(@?)arg1 ",
+    // "+ (id)combineLatest:(id)arg0 ",
+    // "+ (id)concat:(id)arg0 ",
+    // "+ (id)createSignal:(@?)arg0 ",
+    // "+ (id)defer:(@?)arg0 ",
+    // "+ (id)empty",
+    // "+ (id)error:(id)arg0 ",
+    // "+ (id)if:(id)arg0 then:(id)arg1 else:(id)arg2 ",
+    // "+ (id)interval:(double)arg0 ",
+    // "+ (id)interval:(double)arg0 onScheduler:(id)arg1 withLeeway:(double)arg2 ",
+    // "+ (id)interval:(double)arg0 onScheduler:(id)arg1 ",
+    // "+ (id)interval:(double)arg0 withLeeway:(double)arg1 ",
+    // "+ (id)join:(id)arg0 block:(@?)arg1 ",
+    // "+ (id)merge:(id)arg0 ",
+    // "+ (id)never",
+    // "+ (id)replaySubjectWithCapacity:(Q)arg0 ",
+    // "+ (id)return:(id)arg0 ",
+    // "+ (id)signalWithKey:(id)arg0 ",
+    // "+ (id)start:(@?)arg0 ",
+    // "+ (id)startEagerlyWithScheduler:(id)arg0 block:(@?)arg1 ",
+    // "+ (id)startLazilyWithScheduler:(id)arg0 block:(@?)arg1 ",
+    // "+ (id)startWithScheduler:(id)arg0 block:(@?)arg1 ",
+    // "+ (id)startWithScheduler:(id)arg0 subjectBlock:(@?)arg1 ",
+    // "+ (id)subject",
+    // "+ (id)switch:(id)arg0 cases:(id)arg1 default:(id)arg2 ",
+    // "+ (id)zip:(id)arg0 reduce:(@?)arg1 ",
+    // "+ (id)zip:(id)arg0 "
+
+    NSArray *instanceMethods = [classes
+        foldLeftWithStart:@[]
+        reduce:^(NSArray *accumulator, NSString *class) {
+        	return reduce(accumulator, class, NO);
+        }];
+
+    NSLog(@"instanceMethods: %@", instanceMethods);
+
+    // 输出如下
+    //
+    // 1. 打勾的表示是公开的方法，下面有提供相应的测试用例
+    // 2. 打叉的表示是私有的方法或者其他不相关的方法
+    //
+    // "- (void).cxx_destruct",
+    // "- (id)aggregateWithStart:(id)arg0 combine:(@?)arg1 ",
+    // "- (id)aggregateWithStart:(id)arg0 reduce:(@?)arg1 ",
+    // "- (id)aggregateWithStart:(id)arg0 reduceWithIndex:(@?)arg1 ",
+    // "- (id)aggregateWithStartFactory:(@?)arg0 combine:(@?)arg1 ",
+    // "- (id)aggregateWithStartFactory:(@?)arg0 reduce:(@?)arg1 ",
+    // "- (id)all:(@?)arg0 ",
+    // "- (id)and",
+    // "- (id)any",
+    // "- (id)any:(@?)arg0 ",
+    // "- (id)asynchronousFirstOrDefault:(id)arg0 success:(BOOL *)arg1 error:(id *)arg2 ",
+    // "- (BOOL)asynchronouslyWaitUntilCompleted:(id *)arg0 ",
+    // "- (id)bind:(@?)arg0 ",
+    // "- (id)buffer:(Q)arg0 ",
+    // "- (id)bufferWithTime:(double)arg0 ",
+    // "- (id)bufferWithTime:(double)arg0 onScheduler:(id)arg1 ",
+    // "- (Q)capacity",
+    // "- (id)catch:(@?)arg0 ",
+    // "- (id)catchTo:(id)arg0 ",
+    // "- (id)collect",
+    // "- (id)combineLatestWith:(id)arg0 ",
+    // "- (id)combinePreviousWithStart:(id)arg0 reduce:(@?)arg1 ",
+    // "- (id)concat:(id)arg0 ",
+    // "- (id)concat",
+    // "- (id)currentValue",
+    // "- (void)dealloc",
+    // "- (id)delay:(double)arg0 ",
+    // "- (id)deliverOn:(id)arg0 ",
+    // "- (id)deliverOnMainThread",
+    // "- (id)dematerialize",
+    // "- (id)description",
+    // "- (@?)didSubscribe",
+    // "- (void)didSubscribeWithDisposable:(id)arg0 ",
+    // "- (id)disposable",
+    // "- (id)distinctUntilChanged",
+    // "- (id)doCompleted:(@?)arg0 ",
+    // "- (id)doError:(@?)arg0 ",
+    // "- (id)doNext:(@?)arg0 ",
+    // "- (void)enumerateSubscribersUsingBlock:(@?)arg0 ",
+    // "- (id)error",
+    // "- (id)executeCommand:(id)arg0 ",
+    // "- (id)filter:(@?)arg0 ",
+    // "- (id)finally:(@?)arg0 ",
+    // "- (id)first",
+    // "- (id)firstOrDefault:(id)arg0 ",
+    // "- (id)firstOrDefault:(id)arg0 success:(BOOL *)arg1 error:(id *)arg2 ",
+    // "- (id)flatten:(Q)arg0 ",
+    // "- (id)flatten",
+    // "- (id)flattenMap:(@?)arg0 ",
+    // "- (id)groupBy:(@?)arg0 transform:(@?)arg1 ",
+    // "- (id)groupBy:(@?)arg0 ",
+    // "- (BOOL)hasCompleted",
+    // "- (BOOL)hasError",
+    // "- (id)ignore:(id)arg0 ",
+    // "- (id)ignoreElements",
+    // "- (id)ignoreValues",
+    // "- (id)init",
+    // "- (id)initWithCapacity:(Q)arg0 ",
+    // "- (id)initWithValues:(id)arg0 otherTerminal:(id)arg1 ",
+    // "- (id)initially:(@?)arg0 ",
+    // "- (id)key",
+    // "- (id)let:(@?)arg0 ",
+    // "- (id)logAll",
+    // "- (id)logCompleted",
+    // "- (id)logError",
+    // "- (id)logNext",
+    // "- (id)map:(@?)arg0 ",
+    // "- (id)mapPreviousWithStart:(id)arg0 reduce:(@?)arg1 ",
+    // "- (id)mapReplace:(id)arg0 ",
+    // "- (id)materialize",
+    // "- (id)merge:(id)arg0 ",
+    // "- (id)multicast:(id)arg0 ",
+    // "- (id)name",
+    // "- (id)not",
+    // "- (id)or",
+    // "- (id)otherTerminal",
+    // "- (id)publish",
+    // "- (id)reduceApply",
+    // "- (id)reduceEach:(@?)arg0 ",
+    // "- (id)repeat",
+    // "- (id)replay",
+    // "- (id)replayLast",
+    // "- (id)replayLazily",
+    // "- (id)retry",
+    // "- (id)retry:(q)arg0 ",
+    // "- (id)sample:(id)arg0 ",
+    // "- (id)scanWithStart:(id)arg0 combine:(@?)arg1 ",
+    // "- (id)scanWithStart:(id)arg0 reduce:(@?)arg1 ",
+    // "- (id)scanWithStart:(id)arg0 reduceWithIndex:(@?)arg1 ",
+    // "- (void)sendCompleted",
+    // "- (void)sendError:(id)arg0 ",
+    // "- (void)sendNext:(id)arg0 ",
+    // "- (id)sequence",
+    // "- (id)sequenceMany:(@?)arg0 ",
+    // "- (id)sequenceNext:(@?)arg0 ",
+    // "- (void)setCurrentValue:(id)arg0 ",
+    // "- (void)setError:(id)arg0 ",
+    // "- (void)setHasCompleted:(BOOL)arg0 ",
+    // "- (void)setHasError:(BOOL)arg0 ",
+    // "- (void)setKey:(id)arg0 ",
+    // "- (id)setKeyPath:(id)arg0 onObject:(id)arg1 nilValue:(id)arg2 ",
+    // "- (id)setKeyPath:(id)arg0 onObject:(id)arg1 ",
+    // "- (void)setName:(id)arg0 ",
+    // "- (id)setNameWithFormat:(id)arg0 ",
+    // "- (id)skip:(Q)arg0 ",
+    // "- (id)skipUntilBlock:(@?)arg0 ",
+    // "- (id)skipWhileBlock:(@?)arg0 ",
+    // "- (id)startWith:(id)arg0 ",
+    // "- (id)subscribe:(id)arg0 ",
+    // "- (id)subscribeCompleted:(@?)arg0 ",
+    // "- (id)subscribeError:(@?)arg0 completed:(@?)arg1 ",
+    // "- (id)subscribeError:(@?)arg0 ",
+    // "- (id)subscribeNext:(@?)arg0 ",
+    // "- (id)subscribeNext:(@?)arg0 completed:(@?)arg1 ",
+    // "- (id)subscribeNext:(@?)arg0 error:(@?)arg1 completed:(@?)arg2 ",
+    // "- (id)subscribeNext:(@?)arg0 error:(@?)arg1 ",
+    // "- (id)subscribeOn:(id)arg0 ",
+    // "- (id)subscribers",
+    // "- (id)switchToLatest",
+    // "- (id)take:(Q)arg0 ",
+    // "- (id)takeLast:(Q)arg0 ",
+    // "- (id)takeUntil:(id)arg0 ",
+    // "- (id)takeUntilBlock:(@?)arg0 ",
+    // "- (id)takeUntilReplacement:(id)arg0 ",
+    // "- (id)takeWhileBlock:(@?)arg0 ",
+    // "- (id)then:(@?)arg0 ",
+    // "- (id)throttle:(double)arg0 valuesPassingTest:(@?)arg1 ",
+    // "- (id)throttle:(double)arg0 ",
+    // "- (id)timeout:(double)arg0 ",
+    // "- (id)timeout:(double)arg0 onScheduler:(id)arg1 ",
+    // "- (id)toArray",
+    // "- (id)toProperty:(id)arg0 onObject:(id)arg1 ",
+    // "- (id)try:(@?)arg0 ",
+    // "- (id)tryMap:(@?)arg0 ",
+    // "- (id)value",
+    // "- (id)values",
+    // "- (id)valuesReceived",
+    // "- (BOOL)waitUntilCompleted:(id *)arg0 ",
+    // "- (id)windowWithStart:(id)arg0 close:(@?)arg1 ",
+    // "- (id)zipWith:(id)arg0 "
+}
+
 #pragma mark - Monad interface
 
 /// RACReturnSignal
@@ -55,16 +320,16 @@
 /// RACDynamicSignal
 - (void)test_bind {
     RACSignal *letters = [@"A B C D E F G H I" componentsSeparatedByString:@" "].rac_sequence.signal;
-    
+
     RACSignal *result = [letters bind:^{
         return ^(NSString *letter, BOOL *stop) {
             if ([letter isEqualToString:@"E"]) *stop = YES;
             return [RACSignal return:[letter stringByAppendingString:letter]];
         };
     }];
-    
+
     NSArray *expect = [@"AA BB CC DD EE" componentsSeparatedByString:@" "];
-    
+
     XCTAssertTrue([result.toArray isEqualToArray:expect]);
 }
 
@@ -81,44 +346,44 @@
 /// RACDynamicSignal
 - (void)test_aggregateWithStart_reduce {
     RACSignal *numbers = [@"1 2 3 4 5 6 7 8 9" componentsSeparatedByString:@" "].rac_sequence.signal;
-    
+
     RACSignal *result = [numbers
         aggregateWithStart:@"0"
         reduce:^(NSString *running, NSString *next) {
             return @(running.integerValue + next.integerValue).stringValue;
         }];
-    
+
     XCTAssertTrue([result.first isEqualToString:@"45"]);
 }
 
 /// RACDynamicSignal
 - (void)test_aggregateWithStart_reduceWithIndex {
     RACSignal *numbers = [@"1 2 3 4 5 6 7 8 9" componentsSeparatedByString:@" "].rac_sequence.signal;
-    
+
     RACSignal *result = [numbers
         aggregateWithStart:@"0"
         reduceWithIndex:^(NSString *running, NSString *next, NSUInteger index) {
             return @(running.integerValue + next.integerValue + index).stringValue;
         }];
-    
+
     XCTAssertTrue([result.first isEqualToString:@"81"]);
 }
 
 /// RACDynamicSignal
 - (void)test_aggregateWithStartFactory_reduce {
     RACSignal *numbers = [@"1 2 3 4 5 6 7 8 9" componentsSeparatedByString:@" "].rac_sequence.signal;
-    
+
     RACSignal *result = [numbers aggregateWithStartFactory:^{
         return @"0";
     } reduce:^(NSString *running, NSString *next) {
         return @(running.integerValue + next.integerValue).stringValue;
     }];
-    
+
     XCTAssertTrue([result.first isEqualToString:@"45"]);
 }
 
 - (void)concat {
-    
+
 }
 
 #pragma mark - Building signals
@@ -135,12 +400,12 @@
         [subscriber sendNext:@"H"];
         [subscriber sendNext:@"I"];
         [subscriber sendCompleted];
-        
+
         return [RACDisposable disposableWithBlock:^{}];
     }];
-    
+
     NSArray *expect = [@"A B C D E F G H I" componentsSeparatedByString:@" "];
-    
+
     XCTAssertTrue([result.toArray isEqualToArray:expect]);
 }
 
@@ -155,30 +420,30 @@
 /// RACDynamicSignal
 - (void)test_scanWithStart_reduce {
     RACSignal *numbers = [@"1 2 3 4 5 6 7 8 9" componentsSeparatedByString:@" "].rac_sequence.signal;
-    
+
     RACSignal *result = [numbers
         scanWithStart:@"0"
         reduce:^(NSString *running, NSString *next) {
         	return @(running.integerValue + next.integerValue).stringValue;
         }];
-    
+
     NSArray *expect = [@"1 3 6 10 15 21 28 36 45" componentsSeparatedByString:@" "];
-    
+
     XCTAssertTrue([result.toArray isEqualToArray:expect]);
 }
 
 /// RACDynamicSignal
 - (void)test_scanWithStart_reduceWithIndex {
     RACSignal *numbers = [@"1 2 3 4 5 6 7 8 9" componentsSeparatedByString:@" "].rac_sequence.signal;
-    
+
     RACSignal *result = [numbers
         scanWithStart:@"0"
         reduceWithIndex:^(NSString *running, NSString *next, NSUInteger index) {
         	return @(running.integerValue + next.integerValue + index).stringValue;
         }];
-    
+
     NSArray *expect = [@"1 4 9 16 25 36 49 64 81" componentsSeparatedByString:@" "];
-    
+
     XCTAssertTrue([result.toArray isEqualToArray:expect]);
 }
 

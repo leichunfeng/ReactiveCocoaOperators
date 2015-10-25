@@ -86,7 +86,7 @@
     NSArray * (^reduce)(NSArray *, NSString *, BOOL) = ^(NSArray *accumulator, NSString *class, BOOL classMethods) {
         NSArray *methods = classMethods ? [NSClassFromString(class) classMethods] : [NSClassFromString(class) instanceMethods];
 
-        accumulator = [accumulator.rac_sequence concat:methods.rac_sequence].array;
+        accumulator = [accumulator.rac_sequence concat:methods.rac_sequence ?: [RACSequence empty]].array;
         accumulator = [NSSet setWithArray:accumulator].allObjects;
 
         return [accumulator sortedArrayUsingComparator:^(NSString *method1, NSString *method2) {
