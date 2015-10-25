@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "NSObject+DLIntrospection.h"
+#import "TestsHelper.h"
 
 /// RACSequence 类簇（class cluster），代表不可变的值的序列
 ///
@@ -29,15 +29,15 @@
 /// * NSObject
 /// L * RACStream
 ///   L * RACSequence
-    //    L * RACDynamicSequence
-    //    L * RACEmptySequence
-    //    L * RACIndexSetSequence
-    //    L * RACSignalSequence
-    //    L * RACStringSequence
-    //    L * RACTupleSequence
-    //    L * RACUnarySequence
-    //    L * RACArraySequence
-    //      L * RACEagerSequence
+///   L * RACDynamicSequence
+///   L * RACEmptySequence
+///   L * RACIndexSetSequence
+///   L * RACSignalSequence
+///   L * RACStringSequence
+///   L * RACTupleSequence
+///   L * RACUnarySequence
+///   L * RACArraySequence
+///     L * RACEagerSequence
 
 @interface RACSequenceTests : XCTestCase
 
@@ -48,7 +48,7 @@
 #pragma mark - Find out all methods
 
 - (void)testFindOutAllMethods {
-    RACSequence *classes = @[
+    NSArray *classes = @[
 		@"RACStream",
         @"RACSequence",
         @"RACUnarySequence",
@@ -60,63 +60,9 @@
         @"RACEagerSequence",
         @"RACStringSequence",
         @"RACTupleSequence",
-    ].rac_sequence;
+    ];
 
-    BOOL (^filter)(NSString *) = ^(NSString *component) {
-        return @(component.length > 0 && ![component isEqualToString:@"+"] && ![component isEqualToString:@"-"]).boolValue;
-    };
-
-    NSString * (^map)(NSString *) = ^(NSString *component) {
-        NSString *firstLetter = component.rac_sequence.array.firstObject;
-        if ([firstLetter isEqualToString:@"("]) {
-            return [[[component.rac_sequence
-                skipUntilBlock:^(NSString *character) {
-                	return [character isEqualToString:@")"];
-                }]
-                takeUntilBlock:^(NSString *character) {
-                	return [character isEqualToString:@":"];
-                }].array componentsJoinedByString:@""];
-        } else {
-            return [[component.rac_sequence takeUntilBlock:^(NSString *character) {
-                return [character isEqualToString:@":"];
-            }].array componentsJoinedByString:@""];
-        }
-    };
-
-    NSArray * (^reduce)(NSArray *, NSString *, BOOL) = ^(NSArray *accumulator, NSString *class, BOOL classMethods) {
-        NSArray *methods = classMethods ? [NSClassFromString(class) classMethods] : [NSClassFromString(class) instanceMethods];
-
-        accumulator = [accumulator.rac_sequence concat:methods.rac_sequence ?: [RACSequence empty]].array;
-        accumulator = [NSSet setWithArray:accumulator].allObjects;
-
-        return [accumulator sortedArrayUsingComparator:^(NSString *method1, NSString *method2) {
-            RACSequence *components1 = [[[method1 componentsSeparatedByString:@" "].rac_sequence
-            	filter:filter]
-				map:map];
-            
-            RACSequence *components2 = [[[method2 componentsSeparatedByString:@" "].rac_sequence
-            	filter:filter]
-                map:map];
-
-            RACSequence *zippedComponents = [components1 zipWith:components2];
-
-            return [[[zippedComponents
-                map:^(RACTuple *tuple) {
-                    RACTupleUnpack(NSString *component1, NSString *component2) = tuple;
-                    return @([component1 compare:component2]);
-                }]
-                foldLeftWithStart:@(NSOrderedSame)
-                reduce:^(NSNumber *accumulator, NSNumber *next) {
-                	return accumulator.integerValue == NSOrderedSame ? next : accumulator;
-                }] integerValue];
-        }];
-    };
-
-    NSArray *classMethods = [classes
-		foldLeftWithStart:@[]
-        reduce:^(NSArray *accumulator, NSString *class) {
-            return reduce(accumulator, class, YES);
-        }];
+    NSArray *classMethods = [TestsHelper classMethodsInClasses:classes];
 
     NSLog(@"classMethods: %@", classMethods);
 
@@ -140,11 +86,7 @@
     // √ "+ (id)zip:(id)arg0 ",
     // √ "+ (id)zip:(id)arg0 reduce:(@?)arg1 "
 
-    NSArray *instanceMethods = [classes
-    	foldLeftWithStart:@[]
-        reduce:^(NSArray *accumulator, NSString *class) {
-            return reduce(accumulator, class, NO);
-        }];
+    NSArray *instanceMethods = [TestsHelper instanceMethodsInClasses:classes];
 
     NSLog(@"instanceMethods: %@", instanceMethods);
 
@@ -676,7 +618,7 @@
 - (void)testInstanceMethod_zipWith {
     RACSequence *letters = [RACTuple tupleWithObjectsFromArray:[@"A B C D E F G H I" componentsSeparatedByString:@" "]].rac_sequence;
     RACSequence *numbers = [RACTuple tupleWithObjectsFromArray:[@"1 2 3 4 5 6 7 8 9" componentsSeparatedByString:@" "]].rac_sequence;
-    
+
     RACSequence *result = [letters zipWith:numbers];
     RACSequence *expect = [RACTuple tupleWithObjectsFromArray:@[
         RACTuplePack(@"A", @"1"),
@@ -689,7 +631,7 @@
         RACTuplePack(@"H", @"8"),
         RACTuplePack(@"I", @"9"),
     ]].rac_sequence;
-    
+
     XCTAssertTrue([result isEqual:expect]);
 }
 
