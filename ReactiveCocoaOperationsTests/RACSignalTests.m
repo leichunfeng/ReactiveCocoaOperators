@@ -1628,7 +1628,7 @@
     [connection connect];
 }
 
-/// RACDynamicSignal
+/// RACSubject
 - (void)testInstanceMethod_reduceApply {
     RACSubject *numbersA = [RACSubject subject];
     RACSubject *numbersB = [RACSubject subject];
@@ -1652,6 +1652,128 @@
     [numbersB sendNext:@"2"];
     [numbersA sendNext:@"3"];
     [numbersB sendNext:@"3"];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_reduceEach {
+    RACSignal *tuples = @[
+        RACTuplePack(@"A", @"1"),
+        RACTuplePack(@"B", @"2"),
+        RACTuplePack(@"C", @"3"),
+        RACTuplePack(@"D", @"4"),
+        RACTuplePack(@"E", @"5"),
+        RACTuplePack(@"F", @"6"),
+        RACTuplePack(@"G", @"7"),
+        RACTuplePack(@"H", @"8"),
+        RACTuplePack(@"I", @"9"),
+    ].rac_sequence.signal;
+    
+    RACSignal *result = [tuples reduceEach:^(NSString *letter, NSString *number) {
+        return [letter stringByAppendingString:number];
+    }];
+    
+    // 输出：A1 B2 C3 D4 E5 F6 G7 H8 I9
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_repeat {
+    RACSignal *letters = [@"A B C" componentsSeparatedByString:@" "].rac_sequence.signal;
+    
+    RACSignal *result = [[letters
+		repeat]
+        take:9];
+    
+    // 输出：A B C A B C A B C
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_replay {
+    __block unsigned subscriptions = 0;
+    
+    RACSignal *letters = [RACSignal createSignal:^ RACDisposable * (id<RACSubscriber> subscriber) {
+        subscriptions++;
+        
+        [subscriber sendNext:@"A"];
+        [subscriber sendNext:@"B"];
+        [subscriber sendNext:@"C"];
+        [subscriber sendCompleted];
+        
+        return nil;
+    }];
+    
+    RACSignal *result = [letters replay];
+    
+    // 输出：A B C
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+    
+    // 输出：subscription 1
+    [result subscribeCompleted:^{
+        NSLog(@"subscription %u", subscriptions);
+    }];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_replayLast {
+    __block unsigned subscriptions = 0;
+    
+    RACSignal *letters = [RACSignal createSignal:^ RACDisposable * (id<RACSubscriber> subscriber) {
+        subscriptions++;
+        
+        [subscriber sendNext:@"A"];
+        [subscriber sendNext:@"B"];
+        [subscriber sendNext:@"C"];
+        [subscriber sendCompleted];
+        
+        return nil;
+    }];
+    
+    RACSignal *result = [letters replayLast];
+    
+    // 输出：C
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+    
+    // 输出：subscription 1
+    [result subscribeCompleted:^{
+        NSLog(@"subscription %u", subscriptions);
+    }];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_replayLazily {
+    __block unsigned subscriptions = 0;
+    
+    RACSignal *letters = [RACSignal createSignal:^ RACDisposable * (id<RACSubscriber> subscriber) {
+        subscriptions++;
+        
+        [subscriber sendNext:@"A"];
+        [subscriber sendNext:@"B"];
+        [subscriber sendNext:@"C"];
+        [subscriber sendCompleted];
+        
+        return nil;
+    }];
+    
+    RACSignal *result = [letters replayLazily];
+    
+    // 输出：A B C
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+    
+    // 输出：subscription 1
+    [result subscribeCompleted:^{
+        NSLog(@"subscription %u", subscriptions);
+    }];
 }
 
 @end
