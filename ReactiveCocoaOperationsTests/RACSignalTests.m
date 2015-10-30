@@ -1776,4 +1776,60 @@
     }];
 }
 
+- (void)testInstanceMethod_retry_1 {
+    __block unsigned retry = 0;
+    
+    RACSignal *letters = [RACSignal createSignal:^ RACDisposable * (id<RACSubscriber> subscriber) {
+        if (retry <= 3) {
+            [subscriber sendError:nil];
+        } else {
+            [subscriber sendNext:@"A"];
+            [subscriber sendNext:@"B"];
+            [subscriber sendNext:@"C"];
+            [subscriber sendCompleted];
+        }
+        
+        retry++;
+        
+        return nil;
+    }];
+    
+    RACSignal *result = [[letters
+		retry]
+		subscribeOn:[RACScheduler scheduler]];
+    
+    // 输出：A B C
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+}
+
+- (void)testInstanceMethod_retry_2 {
+    __block unsigned retry = 0;
+    
+    RACSignal *letters = [RACSignal createSignal:^ RACDisposable * (id<RACSubscriber> subscriber) {
+        if (retry <= 3) {
+            [subscriber sendError:nil];
+        } else {
+            [subscriber sendNext:@"A"];
+            [subscriber sendNext:@"B"];
+            [subscriber sendNext:@"C"];
+            [subscriber sendCompleted];
+        }
+
+        retry++;
+        
+        return nil;
+    }];
+    
+    RACSignal *result = [[letters
+        retry:3]
+        subscribeOn:[RACScheduler scheduler]];
+    
+    // 输出：空
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+}
+
 @end
