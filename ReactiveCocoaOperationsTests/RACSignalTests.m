@@ -1886,4 +1886,40 @@
     }];
 }
 
+/// RACDynamicSignal
+- (void)testInstanceMethod_sendCompleted {
+    RACSubject *result = [RACSubject subject];
+    
+    // 输出：subscribeCompleted
+    [result subscribeCompleted:^{
+        NSLog(@"subscribeCompleted");
+    }];
+    
+    [result sendCompleted];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_sendError {
+    RACSubject *result = [RACSubject subject];
+    
+    // 输出：subscribeError
+    [result subscribeError:^(NSError *_) {
+        NSLog(@"subscribeError");
+    }];
+    
+    [result sendError:nil];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_sendNext {
+    RACSubject *result = [RACSubject subject];
+    
+    // 输出：subscribeNext
+    [result subscribeNext:^(id _) {
+        NSLog(@"subscribeNext");
+    }];
+    
+    [result sendNext:nil];
+}
+
 @end
