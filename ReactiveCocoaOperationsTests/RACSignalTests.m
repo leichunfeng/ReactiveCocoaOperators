@@ -1832,4 +1832,26 @@
     }];
 }
 
+- (void)testInstanceMethod_sample {
+    RACSubject *letters = [RACSubject subject];
+    RACSubject *sampler = [RACSubject subject];
+    
+    RACSignal *result = [letters sample:sampler];
+    
+    // 输出：A B C
+    [result subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
+    
+    [sampler sendNext:nil];
+    [letters sendNext:@"A"];
+    [sampler sendNext:nil];
+    [letters sendNext:@"B"];
+    [sampler sendNext:nil];
+    [letters sendNext:@"C"];
+    [sampler sendNext:nil];
+    [letters sendCompleted];
+    [sampler sendCompleted];
+}
+
 @end
