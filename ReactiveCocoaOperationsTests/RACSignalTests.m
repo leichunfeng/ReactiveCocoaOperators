@@ -1889,37 +1889,54 @@
 /// RACDynamicSignal
 - (void)testInstanceMethod_sendCompleted {
     RACSubject *result = [RACSubject subject];
-    
+
     // 输出：subscribeCompleted
     [result subscribeCompleted:^{
         NSLog(@"subscribeCompleted");
     }];
-    
+
     [result sendCompleted];
 }
 
 /// RACDynamicSignal
 - (void)testInstanceMethod_sendError {
     RACSubject *result = [RACSubject subject];
-    
+
     // 输出：subscribeError
-    [result subscribeError:^(NSError *_) {
+    [result subscribeError:^(NSError *error) {
         NSLog(@"subscribeError");
     }];
-    
+
     [result sendError:nil];
 }
 
 /// RACDynamicSignal
 - (void)testInstanceMethod_sendNext {
     RACSubject *result = [RACSubject subject];
-    
+
     // 输出：subscribeNext
     [result subscribeNext:^(id _) {
         NSLog(@"subscribeNext");
     }];
-    
+
     [result sendNext:nil];
+}
+
+/// RACDynamicSignal
+- (void)testInstanceMethod_sequence {
+    RACSignal *letters = [RACSignal createSignal:^ RACDisposable * (id<RACSubscriber> subscriber) {
+        [subscriber sendNext:@"A"];
+        [subscriber sendNext:@"B"];
+        [subscriber sendNext:@"C"];
+        [subscriber sendCompleted];
+        
+        return nil;
+    }];
+    
+    RACSequence *result = [letters sequence];
+    RACSequence *expect = [@"A B C" componentsSeparatedByString:@" "].rac_sequence;
+
+    XCTAssertTrue([result isEqual:expect]);
 }
 
 @end
