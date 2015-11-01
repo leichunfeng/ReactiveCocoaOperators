@@ -17,6 +17,7 @@
 		241214E61BDCEB100076C42B /* RACSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214E41BDCEB100076C42B /* RACSignalTests.m */; };
 		241214EB1BDCEB1B0076C42B /* NSObject+DLIntrospection.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214E91BDCEB1B0076C42B /* NSObject+DLIntrospection.m */; };
 		24740F3E1BDCFDE70076C241 /* TestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24740F3D1BDCFDE70076C241 /* TestsHelper.m */; };
+		24F5DB3F1BE5B870005D7675 /* RACSchedulerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DB3E1BE5B870005D7675 /* RACSchedulerTests.m */; };
 		38D5E4C0A83C5D89229F86DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D47A55B7D5C2F64B42524 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		241214E91BDCEB1B0076C42B /* NSObject+DLIntrospection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLIntrospection.m"; sourceTree = "<group>"; };
 		24740F3C1BDCFDE70076C241 /* TestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsHelper.h; sourceTree = "<group>"; };
 		24740F3D1BDCFDE70076C241 /* TestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsHelper.m; sourceTree = "<group>"; };
+		24F5DB3E1BE5B870005D7675 /* RACSchedulerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSchedulerTests.m; sourceTree = "<group>"; };
 		5EA2154984D9F93E40193937 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8B3100A9BDA37074A5869252 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E43D47A55B7D5C2F64B42524 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,7 @@
 		241214D71BDCEA460076C42B /* ReactiveCocoaOperationsTests */ = {
 			isa = PBXGroup;
 			children = (
+				24F5DB3E1BE5B870005D7675 /* RACSchedulerTests.m */,
 				241214E31BDCEB100076C42B /* RACSequenceTests.m */,
 				241214E41BDCEB100076C42B /* RACSignalTests.m */,
 				24740F3C1BDCFDE70076C241 /* TestsHelper.h */,
@@ -304,6 +307,7 @@
 			files = (
 				241214E51BDCEB100076C42B /* RACSequenceTests.m in Sources */,
 				241214E61BDCEB100076C42B /* RACSignalTests.m in Sources */,
+				24F5DB3F1BE5B870005D7675 /* RACSchedulerTests.m in Sources */,
 				24740F3E1BDCFDE70076C241 /* TestsHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
