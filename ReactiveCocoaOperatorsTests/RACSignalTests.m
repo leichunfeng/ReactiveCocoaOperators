@@ -1945,30 +1945,30 @@
 - (void)testInstanceMethod_setKeyPath_onObject_nilValue {
     RACSubject *letters = [RACSubject subject];
 
-    [letters setKeyPath:@"userName" onObject:[NSUserDefaults standardUserDefaults] nilValue:@"nilValue"];
+    [letters setKeyPath:@"username" onObject:[NSUserDefaults standardUserDefaults] nilValue:@"nilValue"];
 
     [letters sendNext:@"leichunfeng"];
-    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"userName"];
-    XCTAssertTrue([userName isEqualToString:@"leichunfeng"]);
+    NSString *username = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"username"];
+    XCTAssertTrue([username isEqualToString:@"leichunfeng"]);
 
     [letters sendNext:nil];
-    userName = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"userName"];
-    XCTAssertTrue([userName isEqualToString:@"nilValue"]);
+    username = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"username"];
+    XCTAssertTrue([username isEqualToString:@"nilValue"]);
 }
 
 /// RACDynamicSignal
 - (void)testInstanceMethod_setKeyPath_onObject {
     RACSubject *letters = [RACSubject subject];
 
-    [letters setKeyPath:@"userName" onObject:[NSUserDefaults standardUserDefaults]];
+    [letters setKeyPath:@"password" onObject:[NSUserDefaults standardUserDefaults]];
 
     [letters sendNext:@"leichunfeng"];
-    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"userName"];
-    XCTAssertTrue([userName isEqualToString:@"leichunfeng"]);
+    NSString *password = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"password"];
+    XCTAssertTrue([password isEqualToString:@"leichunfeng"]);
 
     [letters sendNext:nil];
-    userName = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"userName"];
-    XCTAssertTrue(userName == nil);
+    password = [[NSUserDefaults standardUserDefaults] valueForKeyPath:@"password"];
+    XCTAssertTrue(password == nil);
 }
 
 /// RACDynamicSignal

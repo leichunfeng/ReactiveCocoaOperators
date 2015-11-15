@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		241214C01BDCEA450076C42B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214BF1BDCEA450076C42B /* main.m */; };
-		241214C31BDCEA450076C42B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214C21BDCEA450076C42B /* AppDelegate.m */; };
-		241214C61BDCEA450076C42B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214C51BDCEA450076C42B /* ViewController.m */; };
-		241214C91BDCEA450076C42B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241214C71BDCEA450076C42B /* Main.storyboard */; };
-		241214CB1BDCEA450076C42B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 241214CA1BDCEA450076C42B /* Assets.xcassets */; };
-		241214CE1BDCEA450076C42B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241214CC1BDCEA450076C42B /* LaunchScreen.storyboard */; };
-		241214E51BDCEB100076C42B /* RACSequenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214E31BDCEB100076C42B /* RACSequenceTests.m */; };
-		241214E61BDCEB100076C42B /* RACSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214E41BDCEB100076C42B /* RACSignalTests.m */; };
-		241214EB1BDCEB1B0076C42B /* NSObject+DLIntrospection.m in Sources */ = {isa = PBXBuildFile; fileRef = 241214E91BDCEB1B0076C42B /* NSObject+DLIntrospection.m */; };
-		24740F3E1BDCFDE70076C241 /* TestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24740F3D1BDCFDE70076C241 /* TestsHelper.m */; };
-		24F5DB3F1BE5B870005D7675 /* RACSchedulerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DB3E1BE5B870005D7675 /* RACSchedulerTests.m */; };
-		38D5E4C0A83C5D89229F86DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D47A55B7D5C2F64B42524 /* libPods.a */; };
+		240F358A1BF8B74300DF4A6B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 240F357F1BF8B73400DF4A6B /* Info.plist */; };
+		240F358B1BF8B74F00DF4A6B /* RACSchedulerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F35801BF8B73400DF4A6B /* RACSchedulerTests.m */; };
+		240F358C1BF8B74F00DF4A6B /* RACSequenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F35811BF8B73400DF4A6B /* RACSequenceTests.m */; };
+		240F358D1BF8B74F00DF4A6B /* RACSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F35821BF8B73400DF4A6B /* RACSignalTests.m */; };
+		240F358E1BF8B74F00DF4A6B /* TestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F35841BF8B73400DF4A6B /* TestsHelper.m */; };
+		2481834B1BF8B415008AB887 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 248183451BF8B415008AB887 /* AppDelegate.m */; };
+		2481834C1BF8B415008AB887 /* NSObject+DLIntrospection.m in Sources */ = {isa = PBXBuildFile; fileRef = 248183481BF8B415008AB887 /* NSObject+DLIntrospection.m */; };
+		2481834D1BF8B415008AB887 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2481834A1BF8B415008AB887 /* ViewController.m */; };
+		2481834F1BF8B426008AB887 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2481834E1BF8B426008AB887 /* main.m */; };
+		248183541BF8B46E008AB887 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248183501BF8B46E008AB887 /* LaunchScreen.storyboard */; };
+		248183551BF8B46E008AB887 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248183521BF8B46E008AB887 /* Main.storyboard */; };
+		2481835C1BF8B4C6008AB887 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2481835B1BF8B4C6008AB887 /* Info.plist */; };
+		80CD0F334A28C2D51994357D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D47A55B7D5C2F64B42524 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,25 +33,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		241214BB1BDCEA450076C42B /* ReactiveCocoaOperations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveCocoaOperations.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		241214BF1BDCEA450076C42B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		241214C11BDCEA450076C42B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		241214C21BDCEA450076C42B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		241214C41BDCEA450076C42B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		241214C51BDCEA450076C42B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		241214C81BDCEA450076C42B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		241214CA1BDCEA450076C42B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		241214CD1BDCEA450076C42B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		241214CF1BDCEA450076C42B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		241214D41BDCEA460076C42B /* ReactiveCocoaOperationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveCocoaOperationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		241214DA1BDCEA460076C42B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		241214E31BDCEB100076C42B /* RACSequenceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSequenceTests.m; sourceTree = "<group>"; };
-		241214E41BDCEB100076C42B /* RACSignalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSignalTests.m; sourceTree = "<group>"; };
-		241214E81BDCEB1B0076C42B /* NSObject+DLIntrospection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DLIntrospection.h"; sourceTree = "<group>"; };
-		241214E91BDCEB1B0076C42B /* NSObject+DLIntrospection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLIntrospection.m"; sourceTree = "<group>"; };
-		24740F3C1BDCFDE70076C241 /* TestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsHelper.h; sourceTree = "<group>"; };
-		24740F3D1BDCFDE70076C241 /* TestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsHelper.m; sourceTree = "<group>"; };
-		24F5DB3E1BE5B870005D7675 /* RACSchedulerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSchedulerTests.m; sourceTree = "<group>"; };
+		240F357F1BF8B73400DF4A6B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactiveCocoaOperatorsTests/Info.plist; sourceTree = SOURCE_ROOT; };
+		240F35801BF8B73400DF4A6B /* RACSchedulerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RACSchedulerTests.m; path = ReactiveCocoaOperatorsTests/RACSchedulerTests.m; sourceTree = SOURCE_ROOT; };
+		240F35811BF8B73400DF4A6B /* RACSequenceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RACSequenceTests.m; path = ReactiveCocoaOperatorsTests/RACSequenceTests.m; sourceTree = SOURCE_ROOT; };
+		240F35821BF8B73400DF4A6B /* RACSignalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RACSignalTests.m; path = ReactiveCocoaOperatorsTests/RACSignalTests.m; sourceTree = SOURCE_ROOT; };
+		240F35831BF8B73400DF4A6B /* TestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestsHelper.h; path = ReactiveCocoaOperatorsTests/TestsHelper.h; sourceTree = SOURCE_ROOT; };
+		240F35841BF8B73400DF4A6B /* TestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestsHelper.m; path = ReactiveCocoaOperatorsTests/TestsHelper.m; sourceTree = SOURCE_ROOT; };
+		241214BB1BDCEA450076C42B /* ReactiveCocoaOperators.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveCocoaOperators.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		241214D41BDCEA460076C42B /* ReactiveCocoaOperators.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveCocoaOperators.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		248183441BF8B415008AB887 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ReactiveCocoaOperators/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		248183451BF8B415008AB887 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ReactiveCocoaOperators/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		248183471BF8B415008AB887 /* NSObject+DLIntrospection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DLIntrospection.h"; sourceTree = "<group>"; };
+		248183481BF8B415008AB887 /* NSObject+DLIntrospection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLIntrospection.m"; sourceTree = "<group>"; };
+		248183491BF8B415008AB887 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ReactiveCocoaOperators/ViewController.h; sourceTree = SOURCE_ROOT; };
+		2481834A1BF8B415008AB887 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ReactiveCocoaOperators/ViewController.m; sourceTree = SOURCE_ROOT; };
+		2481834E1BF8B426008AB887 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ReactiveCocoaOperators/main.m; sourceTree = SOURCE_ROOT; };
+		248183511BF8B46E008AB887 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ReactiveCocoaOperators/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		248183531BF8B46E008AB887 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ReactiveCocoaOperators/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		2481835B1BF8B4C6008AB887 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactiveCocoaOperators/Info.plist; sourceTree = SOURCE_ROOT; };
 		5EA2154984D9F93E40193937 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8B3100A9BDA37074A5869252 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E43D47A55B7D5C2F64B42524 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D5E4C0A83C5D89229F86DA /* libPods.a in Frameworks */,
+				80CD0F334A28C2D51994357D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,8 +89,8 @@
 		241214BC1BDCEA450076C42B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				241214BB1BDCEA450076C42B /* ReactiveCocoaOperations.app */,
-				241214D41BDCEA460076C42B /* ReactiveCocoaOperationsTests.xctest */,
+				241214BB1BDCEA450076C42B /* ReactiveCocoaOperators.app */,
+				241214D41BDCEA460076C42B /* ReactiveCocoaOperators.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,15 +98,13 @@
 		241214BD1BDCEA450076C42B /* ReactiveCocoaOperations */ = {
 			isa = PBXGroup;
 			children = (
-				241214E71BDCEB1B0076C42B /* DLIntrospection */,
-				241214C11BDCEA450076C42B /* AppDelegate.h */,
-				241214C21BDCEA450076C42B /* AppDelegate.m */,
-				241214C41BDCEA450076C42B /* ViewController.h */,
-				241214C51BDCEA450076C42B /* ViewController.m */,
-				241214C71BDCEA450076C42B /* Main.storyboard */,
-				241214CA1BDCEA450076C42B /* Assets.xcassets */,
-				241214CC1BDCEA450076C42B /* LaunchScreen.storyboard */,
-				241214CF1BDCEA450076C42B /* Info.plist */,
+				248183441BF8B415008AB887 /* AppDelegate.h */,
+				248183451BF8B415008AB887 /* AppDelegate.m */,
+				248183461BF8B415008AB887 /* DLIntrospection */,
+				248183491BF8B415008AB887 /* ViewController.h */,
+				2481834A1BF8B415008AB887 /* ViewController.m */,
+				248183501BF8B46E008AB887 /* LaunchScreen.storyboard */,
+				248183521BF8B46E008AB887 /* Main.storyboard */,
 				241214BE1BDCEA450076C42B /* Supporting Files */,
 			);
 			path = ReactiveCocoaOperations;
@@ -115,7 +113,8 @@
 		241214BE1BDCEA450076C42B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				241214BF1BDCEA450076C42B /* main.m */,
+				2481835B1BF8B4C6008AB887 /* Info.plist */,
+				2481834E1BF8B426008AB887 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -123,24 +122,25 @@
 		241214D71BDCEA460076C42B /* ReactiveCocoaOperationsTests */ = {
 			isa = PBXGroup;
 			children = (
-				24F5DB3E1BE5B870005D7675 /* RACSchedulerTests.m */,
-				241214E31BDCEB100076C42B /* RACSequenceTests.m */,
-				241214E41BDCEB100076C42B /* RACSignalTests.m */,
-				24740F3C1BDCFDE70076C241 /* TestsHelper.h */,
-				24740F3D1BDCFDE70076C241 /* TestsHelper.m */,
-				241214DA1BDCEA460076C42B /* Info.plist */,
+				240F357F1BF8B73400DF4A6B /* Info.plist */,
+				240F35801BF8B73400DF4A6B /* RACSchedulerTests.m */,
+				240F35811BF8B73400DF4A6B /* RACSequenceTests.m */,
+				240F35821BF8B73400DF4A6B /* RACSignalTests.m */,
+				240F35831BF8B73400DF4A6B /* TestsHelper.h */,
+				240F35841BF8B73400DF4A6B /* TestsHelper.m */,
 			);
 			path = ReactiveCocoaOperationsTests;
 			sourceTree = "<group>";
 		};
-		241214E71BDCEB1B0076C42B /* DLIntrospection */ = {
+		248183461BF8B415008AB887 /* DLIntrospection */ = {
 			isa = PBXGroup;
 			children = (
-				241214E81BDCEB1B0076C42B /* NSObject+DLIntrospection.h */,
-				241214E91BDCEB1B0076C42B /* NSObject+DLIntrospection.m */,
+				248183471BF8B415008AB887 /* NSObject+DLIntrospection.h */,
+				248183481BF8B415008AB887 /* NSObject+DLIntrospection.m */,
 			);
-			path = DLIntrospection;
-			sourceTree = "<group>";
+			name = DLIntrospection;
+			path = ReactiveCocoaOperators/DLIntrospection;
+			sourceTree = SOURCE_ROOT;
 		};
 		692FBD8A462EE8D1DA1E7A55 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -162,28 +162,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		241214BA1BDCEA450076C42B /* ReactiveCocoaOperations */ = {
+		241214BA1BDCEA450076C42B /* ReactiveCocoaOperators */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 241214DD1BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperations" */;
+			buildConfigurationList = 241214DD1BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperators" */;
 			buildPhases = (
 				E8DA1166B16031E98B663DD6 /* Check Pods Manifest.lock */,
 				241214B71BDCEA450076C42B /* Sources */,
 				241214B81BDCEA450076C42B /* Frameworks */,
 				241214B91BDCEA450076C42B /* Resources */,
-				E0DE3A6A96FBF04D3F03FF72 /* Copy Pods Resources */,
+				8B134E365504854CBAF23D87 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = ReactiveCocoaOperations;
+			name = ReactiveCocoaOperators;
 			productName = ReactiveCocoaOperations;
-			productReference = 241214BB1BDCEA450076C42B /* ReactiveCocoaOperations.app */;
+			productReference = 241214BB1BDCEA450076C42B /* ReactiveCocoaOperators.app */;
 			productType = "com.apple.product-type.application";
 		};
-		241214D31BDCEA460076C42B /* ReactiveCocoaOperationsTests */ = {
+		241214D31BDCEA460076C42B /* ReactiveCocoaOperatorsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 241214E01BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperationsTests" */;
+			buildConfigurationList = 241214E01BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperatorsTests" */;
 			buildPhases = (
 				241214D01BDCEA460076C42B /* Sources */,
 				241214D11BDCEA460076C42B /* Frameworks */,
@@ -194,9 +194,9 @@
 			dependencies = (
 				241214D61BDCEA460076C42B /* PBXTargetDependency */,
 			);
-			name = ReactiveCocoaOperationsTests;
+			name = ReactiveCocoaOperatorsTests;
 			productName = ReactiveCocoaOperationsTests;
-			productReference = 241214D41BDCEA460076C42B /* ReactiveCocoaOperationsTests.xctest */;
+			productReference = 241214D41BDCEA460076C42B /* ReactiveCocoaOperators.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -217,7 +217,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 241214B61BDCEA450076C42B /* Build configuration list for PBXProject "ReactiveCocoaOperations" */;
+			buildConfigurationList = 241214B61BDCEA450076C42B /* Build configuration list for PBXProject "ReactiveCocoaOperators" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -230,8 +230,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				241214BA1BDCEA450076C42B /* ReactiveCocoaOperations */,
-				241214D31BDCEA460076C42B /* ReactiveCocoaOperationsTests */,
+				241214BA1BDCEA450076C42B /* ReactiveCocoaOperators */,
+				241214D31BDCEA460076C42B /* ReactiveCocoaOperatorsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -241,9 +241,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				241214CE1BDCEA450076C42B /* LaunchScreen.storyboard in Resources */,
-				241214CB1BDCEA450076C42B /* Assets.xcassets in Resources */,
-				241214C91BDCEA450076C42B /* Main.storyboard in Resources */,
+				248183541BF8B46E008AB887 /* LaunchScreen.storyboard in Resources */,
+				248183551BF8B46E008AB887 /* Main.storyboard in Resources */,
+				2481835C1BF8B4C6008AB887 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,13 +251,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240F358A1BF8B74300DF4A6B /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E0DE3A6A96FBF04D3F03FF72 /* Copy Pods Resources */ = {
+		8B134E365504854CBAF23D87 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -294,10 +295,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				241214C61BDCEA450076C42B /* ViewController.m in Sources */,
-				241214EB1BDCEB1B0076C42B /* NSObject+DLIntrospection.m in Sources */,
-				241214C31BDCEA450076C42B /* AppDelegate.m in Sources */,
-				241214C01BDCEA450076C42B /* main.m in Sources */,
+				2481834C1BF8B415008AB887 /* NSObject+DLIntrospection.m in Sources */,
+				2481834B1BF8B415008AB887 /* AppDelegate.m in Sources */,
+				2481834F1BF8B426008AB887 /* main.m in Sources */,
+				2481834D1BF8B415008AB887 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,10 +306,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				241214E51BDCEB100076C42B /* RACSequenceTests.m in Sources */,
-				241214E61BDCEB100076C42B /* RACSignalTests.m in Sources */,
-				24F5DB3F1BE5B870005D7675 /* RACSchedulerTests.m in Sources */,
-				24740F3E1BDCFDE70076C241 /* TestsHelper.m in Sources */,
+				240F358B1BF8B74F00DF4A6B /* RACSchedulerTests.m in Sources */,
+				240F358C1BF8B74F00DF4A6B /* RACSequenceTests.m in Sources */,
+				240F358D1BF8B74F00DF4A6B /* RACSignalTests.m in Sources */,
+				240F358E1BF8B74F00DF4A6B /* TestsHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,26 +318,26 @@
 /* Begin PBXTargetDependency section */
 		241214D61BDCEA460076C42B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 241214BA1BDCEA450076C42B /* ReactiveCocoaOperations */;
+			target = 241214BA1BDCEA450076C42B /* ReactiveCocoaOperators */;
 			targetProxy = 241214D51BDCEA460076C42B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		241214C71BDCEA450076C42B /* Main.storyboard */ = {
+		248183501BF8B46E008AB887 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				241214C81BDCEA450076C42B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		241214CC1BDCEA450076C42B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				241214CD1BDCEA450076C42B /* Base */,
+				248183511BF8B46E008AB887 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		248183521BF8B46E008AB887 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				248183531BF8B46E008AB887 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -427,10 +428,10 @@
 			baseConfigurationReference = 5EA2154984D9F93E40193937 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = ReactiveCocoaOperations/Info.plist;
+				INFOPLIST_FILE = ReactiveCocoaOperators/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leichunfeng.ReactiveCocoaOperations;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ReactiveCocoaOperators;
 			};
 			name = Debug;
 		};
@@ -439,10 +440,10 @@
 			baseConfigurationReference = 8B3100A9BDA37074A5869252 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = ReactiveCocoaOperations/Info.plist;
+				INFOPLIST_FILE = ReactiveCocoaOperators/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leichunfeng.ReactiveCocoaOperations;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ReactiveCocoaOperators;
 			};
 			name = Release;
 		};
@@ -451,11 +452,11 @@
 			baseConfigurationReference = 5EA2154984D9F93E40193937 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = ReactiveCocoaOperationsTests/Info.plist;
+				INFOPLIST_FILE = ReactiveCocoaOperatorsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leichunfeng.ReactiveCocoaOperationsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveCocoaOperations.app/ReactiveCocoaOperations";
+				PRODUCT_NAME = ReactiveCocoaOperators;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveCocoaOperators.app/ReactiveCocoaOperators";
 			};
 			name = Debug;
 		};
@@ -464,18 +465,18 @@
 			baseConfigurationReference = 8B3100A9BDA37074A5869252 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = ReactiveCocoaOperationsTests/Info.plist;
+				INFOPLIST_FILE = ReactiveCocoaOperatorsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leichunfeng.ReactiveCocoaOperationsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveCocoaOperations.app/ReactiveCocoaOperations";
+				PRODUCT_NAME = ReactiveCocoaOperators;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveCocoaOperators.app/ReactiveCocoaOperators";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		241214B61BDCEA450076C42B /* Build configuration list for PBXProject "ReactiveCocoaOperations" */ = {
+		241214B61BDCEA450076C42B /* Build configuration list for PBXProject "ReactiveCocoaOperators" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				241214DB1BDCEA460076C42B /* Debug */,
@@ -484,7 +485,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		241214DD1BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperations" */ = {
+		241214DD1BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperators" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				241214DE1BDCEA460076C42B /* Debug */,
@@ -493,7 +494,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		241214E01BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperationsTests" */ = {
+		241214E01BDCEA460076C42B /* Build configuration list for PBXNativeTarget "ReactiveCocoaOperatorsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				241214E11BDCEA460076C42B /* Debug */,
