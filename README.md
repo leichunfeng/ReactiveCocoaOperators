@@ -1,2 +1,2 @@
-# ReactiveCocoaOperations
-Operations for ReactiveCocoa
+# ReactiveCocoaOperators
+Operators for ReactiveCocoa
