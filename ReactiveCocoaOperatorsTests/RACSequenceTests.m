@@ -14,30 +14,30 @@
 ///
 /// RACSequence 共有 9 个私有的、具体的子类，它们是：
 ///
-/// RACArraySequence    遍历数组
-/// RACDynamicSequence  动态序列
-/// RACEagerSequence    非懒计算的序列
-/// RACEmptySequence    空序列
+/// RACUnarySequence    一元序列
 /// RACIndexSetSequence 遍历索引集
+/// RACEmptySequence    空序列
+/// RACDynamicSequence  动态序列
 /// RACSignalSequence   遍历信号
+/// RACArraySequence    遍历数组
+/// RACEagerSequence    非懒计算的序列
 /// RACStringSequence   遍历字符串
 /// RACTupleSequence    遍历元组
-/// RACUnarySequence    一元序列
 ///
 /// 继承关系如下：
 ///
 /// * NSObject
 /// L * RACStream
 ///   L * RACSequence
-///   L * RACDynamicSequence
-///   L * RACEmptySequence
-///   L * RACIndexSetSequence
-///   L * RACSignalSequence
-///   L * RACStringSequence
-///   L * RACTupleSequence
 ///   L * RACUnarySequence
+///   L * RACIndexSetSequence
+///   L * RACEmptySequence
+///   L * RACDynamicSequence
+///   L * RACSignalSequence
 ///   L * RACArraySequence
 ///     L * RACEagerSequence
+///   L * RACStringSequence
+///   L * RACTupleSequence
 
 @interface RACSequenceTests : XCTestCase
 
