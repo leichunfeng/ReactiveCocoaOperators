@@ -1314,21 +1314,18 @@
 
 /// RACGroupedSignal
 - (void)testInstanceMethod_groupBy {
-    RACSignal *letters = [@"A B C A B C A B C" componentsSeparatedByString:@" "].rac_sequence.signal;
-
-    RACSignal *result = [letters groupBy:^(NSString *letter) {
-        return letter;
-    }];
-
-    [result subscribeNext:^(RACGroupedSignal *groupedSignal) {
-        NSString *key = (NSString *)groupedSignal.key;
-        if ([key isEqualToString:@"C"]) {
-            // 输出：C C C
-            [groupedSignal subscribeNext:^(id x) {
-                NSLog(@"%@", x);
-            }];
-        }
-    }];
+    NSArray *result = [[[[@"A B C A B C A B C" componentsSeparatedByString:@" "].rac_sequence.signal
+        groupBy:^(NSString *letter) {
+            return letter;
+        }]
+        map:^(RACSignal *signal) {
+            return signal.sequence;
+        }].sequence
+    	map:^(RACSequence *sequence) {
+            return sequence.array;
+        }].array;
+    
+    NSLog(@"result: %@", result);
 }
 
 /// RACDynamicSignal
